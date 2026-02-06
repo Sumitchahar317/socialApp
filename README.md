@@ -2,7 +2,8 @@
 
 A simple full-stack social media application where users can share updates, engage with content, and connect with others.
 
-**🚀 Live Demo:** [https://social-app-i7ob.vercel.app/](https://social-app-i7ob.vercel.app/)
+**🚀 Live Demo:** [https://social-app-qbdu.vercel.app/](https://social-app-qbdu.vercel.app/)
+
 
 ## Tech Stack
 *   **Frontend**: React, Vite, Bootstrap
@@ -28,7 +29,6 @@ cd socialApp
 ```bash
 cd server
 npm install
-# Create .env file with MONGO_URL, JWT_SECRET, and PORT
 npm start
 ```
 
