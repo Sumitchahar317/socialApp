@@ -1,0 +1,40 @@
+.container-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  flex-direction: column;  
+}
+
+.main-title {
+  font-size: 4rem;
+  font-weight: 600;
+  color: #2d3436;
+
+}
+
+ .btn-group {
+  padding: 12px 35px;
+  letter-spacing: 1px;
+}
+.btn-login{
+    font-weight: 600 !important;
+    width:auto !important;
+    border-radius: 20px !important; 
+    margin-left: 1rem !important;
+}
+.btn-signup{
+     width:auto !important;
+     font-weight: 600 !important;
+     border-radius: 20px !important; 
+}
+
+.btn-signup:hover {
+     transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 123, 255, 0.3);
+}
+
+.btn-login:hover {
+    box-shadow: 0 10px 20px rgba(0, 123, 255, 0.3);
+    transform: translateY(-3px);
+}   
