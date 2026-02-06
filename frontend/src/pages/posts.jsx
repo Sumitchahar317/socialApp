@@ -10,12 +10,13 @@ const SocialPage = () => {
   const [imageUrl, setImageUrl] = useState("");
 
   const navigate = useNavigate();
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
 
 
   // Fextch all posts
   const fetchPosts = useCallback(async () => {
     try {
-      const res = await fetch('http://localhost:8000/api/posts/all');
+      const res = await fetch(`${BASE_URL}/api/posts/all`);
 
       if (!res.ok) {
         console.error("Failed to fetch posts:", res.status, res.statusText);
@@ -37,7 +38,7 @@ const SocialPage = () => {
   }, []);
 
   useEffect(() => {
-    
+
     fetchPosts();
   }, [fetchPosts]);
 
@@ -46,7 +47,7 @@ const SocialPage = () => {
     e.preventDefault();
     const token = localStorage.getItem('userToken');
 
-    const response = await fetch('http://localhost:8000/api/posts/create', {
+    const response = await fetch(`${BASE_URL}/api/posts/create`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -65,7 +66,7 @@ const SocialPage = () => {
   const handleLike = async (postId) => {
     const token = localStorage.getItem('userToken');
 
-    await fetch(`http://localhost:8000/api/posts/${postId}/like`, {
+    await fetch(`${BASE_URL}/api/posts/${postId}/like`, {
       method: 'PUT',
       headers: { 'Authorization': token }
     });

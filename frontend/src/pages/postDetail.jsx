@@ -1,15 +1,16 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect, useCallback } from 'react';
-import '../style/PostDetails.css'; 
+import '../style/PostDetails.css';
 
 const PostDetail = () => {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const [post, setPost] = useState(null);
   const [commentText, setCommentText] = useState("");
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
 
   const fetchSinglePost = useCallback(async () => {
     try {
-      const res = await fetch(`http://localhost:8000/api/posts/${id}`);
+      const res = await fetch(`${BASE_URL}/api/posts/${id}`);
       if (res.ok) {
         const data = await res.json();
         setPost(data);
@@ -26,18 +27,18 @@ const PostDetail = () => {
   const handleComment = async () => {
     if (!commentText.trim()) return;
 
-    
+
     const userInfo = JSON.parse(localStorage.getItem('userInfo') || '{}');
     const username = userInfo.username || "Unknown";
 
     const token = localStorage.getItem('userToken');
 
-    await fetch(`http://localhost:8000/api/posts/${id}/comment`, {
+    await fetch(`${BASE_URL}/api/posts/${id}/comment`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': token },
       body: JSON.stringify({
         text: commentText,
-        username: username 
+        username: username
       })
     });
     setCommentText("");
@@ -82,7 +83,7 @@ const PostDetail = () => {
           value={commentText}
           onChange={(e) => setCommentText(e.target.value)}
           placeholder="Write a comment..."
-          onKeyDown={(e) => e.key === 'Enter' && handleComment()} 
+          onKeyDown={(e) => e.key === 'Enter' && handleComment()}
         />
         <button onClick={handleComment}>Post</button>
       </div>

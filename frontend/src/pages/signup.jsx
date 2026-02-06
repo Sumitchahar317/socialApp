@@ -1,11 +1,11 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import '../style/signup.css';
-import { useState } from 'react'; 
-import { useNavigate } from 'react-router-dom'; 
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Signup() {
-    
+
     const [formData, setFormData] = useState({
         fullName: '',
         username: '',
@@ -13,7 +13,7 @@ function Signup() {
         password: ''
     });
 
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     // Handle input changes
     const handleChange = (e) => {
@@ -25,27 +25,28 @@ function Signup() {
 
     // Handle form submission
     const handleSubmit = async (e) => {
-        e.preventDefault(); 
+        e.preventDefault();
         try {
-            
-            const response = await fetch('http://localhost:8000/api/signup', {
+
+            const BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
+            const response = await fetch(`${BASE_URL}/api/signup`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData), 
+                body: JSON.stringify(formData),
             });
 
             const data = await response.json();
 
             if (response.ok) {
                 alert("Signup Successful! Redirecting to login...");
-                navigate('/login'); 
+                navigate('/login');
             } else {
                 alert(`Signup Failed: ${data.error || "Unknown error"}`);
             }
         } catch (error) {
-            
+
             alert("Something went wrong. Please try again.");
         }
     };
@@ -59,7 +60,7 @@ function Signup() {
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-3" controlId="formFullName">
                             <Form.Label>Full Name</Form.Label>
-                           
+
                             <Form.Control
                                 type="text"
                                 name="fullName"
